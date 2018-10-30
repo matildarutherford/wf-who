@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import { StaticQuery, graphql } from 'gatsby'
-import { Link } from 'gatsby'
 
 // Styles
 import { GlobalStyle } from '../styles/global.js'

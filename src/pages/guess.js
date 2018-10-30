@@ -1,17 +1,15 @@
 import React from 'react'
-import { Link } from 'gatsby'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
 import { graphql } from 'gatsby'
+import { guessesRef } from '../config/firebase'
 
 // Components
 import Layout from '../components/layout'
-import Heading from '../components/heading'
 import Main from '../components/main'
 
 // CSS
-import { above } from '../styles/mixins'
-import { colours, spacing } from '../styles/variables'
+import { colours } from '../styles/variables'
 import { BaseLink, WhiteContainer, BlackContainer } from '../styles/global'
 
 export const query = graphql`
@@ -26,7 +24,6 @@ export const query = graphql`
 `
 
 const GuessPage = ({ guesses, guess, data }) => {
-  console.log(data);
   return (
   <Layout>
     <Main>
@@ -36,7 +33,7 @@ const GuessPage = ({ guesses, guess, data }) => {
       </WhiteContainer>
       <BlackContainer>
         {data && data.dataJson.photos && data.dataJson.photos.map((photo, index) => {
-          return (<a key={index} onClick={() => guess(photo)}>{ photo.name }</a>);
+          return (<button key={index} onClick={() => guess(photo)}>{ photo.name }</button>);
         })}
       </BlackContainer>
     </Main>
@@ -52,12 +49,14 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    guess: (guess) =>
-      dispatch({
+    guess: (guess) => {
+      guessesRef.push().set(guess);
+      return dispatch({
         type: 'VOTE',
         name: guess.name,
         photo: guess.photo
       })
+    }
   }
 }
 

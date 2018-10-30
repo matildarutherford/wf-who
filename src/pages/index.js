@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'gatsby'
 import styled from 'styled-components'
 
 // Components
@@ -9,7 +8,7 @@ import Main from '../components/main'
 
 // CSS
 import { above } from '../styles/mixins'
-import { colours, spacing } from '../styles/variables'
+import { colours } from '../styles/variables'
 import { baseLinkStyles, BaseLink, WhiteContainer, BlackContainer } from '../styles/global'
 
 const IndexPage = () => (

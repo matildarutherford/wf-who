@@ -3,8 +3,61 @@ import { above } from './mixins'
 import { colours, fonts, timings, spacing, typography } from './variables'
 import { Link } from 'gatsby'
 import styled, { css } from 'styled-components'
+import fontFiles from "./fonts";
 
 export const GlobalStyle = createGlobalStyle`
+  @font-face {
+      font-family: 'Gotham Book';
+      src: url('Gotham-Book.eot');
+      src: local('Gotham Book'), local('Gotham-Book'),
+          url('${fontFiles.GothamBookEOT}?#iefix') format('embedded-opentype'),
+          url('${fontFiles.GothamBookWOFF2}') format('woff2'),
+          url('${fontFiles.GothamBookWOFF}') format('woff'),
+          url('${fontFiles.GothamBookTTF}') format('truetype'),
+          url('${fontFiles.GothamBookSVG}#Gotham-Book') format('svg');
+      font-weight: normal;
+      font-style: normal;
+  }
+
+  @font-face {
+      font-family: 'Gotham';
+      src: url('Gotham-BoldItalic.eot');
+      src: local('Gotham Bold Italic'), local('Gotham-BoldItalic'),
+          url('${fontFiles.GothamBoldItalicEOT}?#iefix') format('embedded-opentype'),
+          url('${fontFiles.GothamBoldItalicWOFF2}') format('woff2'),
+          url('${fontFiles.GothamBoldItalicWOFF}') format('woff'),
+          url('${fontFiles.GothamBoldItalicTTF}') format('truetype'),
+          url('${fontFiles.GothamBoldItalicSVG}#Gotham-BoldItalic') format('svg');
+      font-weight: bold;
+      font-style: italic;
+  }
+
+  @font-face {
+      font-family: 'Gotham Book';
+      src: url('Gotham-BookItalic.eot');
+      src: local('Gotham Book Italic'), local('Gotham-BookItalic'),
+          url('${fontFiles.GothamBookItalicEOT}?#iefix') format('embedded-opentype'),
+          url('${fontFiles.GothamBookItalicWOFF2}') format('woff2'),
+          url('${fontFiles.GothamBookItalicWOFF}') format('woff'),
+          url('${fontFiles.GothamBookItalicTTF}') format('truetype'),
+          url('${fontFiles.GothamBookItalicSVG}#Gotham-BookItalic') format('svg');
+      font-weight: normal;
+      font-style: italic;
+  }
+
+  @font-face {
+      font-family: 'Gotham';
+      src: url('Gotham-Bold.eot');
+      src: local('Gotham Bold'), local('Gotham-Bold'),
+          url('${fontFiles.GothamBoldEOT}?#iefix') format('embedded-opentype'),
+          url('${fontFiles.GothamBoldWOFF2}') format('woff2'),
+          url('${fontFiles.GothamBoldWOFF}') format('woff'),
+          url('${fontFiles.GothamBoldTTF}') format('truetype'),
+          url('${fontFiles.GothamBoldSVG}#Gotham-Bold') format('svg');
+      font-weight: bold;
+      font-style: normal;
+  }
+
   html{line-height:1.15;-webkit-text-size-adjust:100%}body{margin:0}h1{font-size:2em;margin:.67em 0}hr{box-sizing:content-box;height:0;overflow:visible}pre{font-family:monospace,monospace;font-size:1em}a{background-color:transparent}abbr[title]{border-bottom:none;text-decoration:underline;text-decoration:underline dotted}b,strong{font-weight:bolder}code,kbd,samp{font-family:monospace,monospace;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}img{border-style:none}button,input,optgroup,select,textarea{font-family:inherit;font-size:100%;line-height:1.15;margin:0}button,input{overflow:visible}button,select{text-transform:none}[type=button],[type=reset],[type=submit],button{-webkit-appearance:button}[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner,button::-moz-focus-inner{border-style:none;padding:0}[type=button]:-moz-focusring,[type=reset]:-moz-focusring,[type=submit]:-moz-focusring,button:-moz-focusring{outline:1px dotted ButtonText}fieldset{padding:.35em .75em .625em}legend{box-sizing:border-box;color:inherit;display:table;max-width:100%;padding:0;white-space:normal}progress{vertical-align:baseline}textarea{overflow:auto}[type=checkbox],[type=radio]{box-sizing:border-box;padding:0}[type=number]::-webkit-inner-spin-button,[type=number]::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}[type=search]::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}details{display:block}summary{display:list-item}template{display:none}[hidden]{display:none}
 
   html {
@@ -40,7 +93,9 @@ export const GlobalStyle = createGlobalStyle`
 
 export const baseLinkStyles = css`
   display: block;
+  font-family: Gotham, sans-serif;
   font-size: 2.125rem;
+  font-weight: bold;
   padding: ${spacing.default};
   position: absolute;
   text-decoration: none;
@@ -64,11 +119,11 @@ export const BaseContainer = styled.section`
   height: 50vh;
   padding: ${spacing.default};
   position: relative;
-  width: 100vh;
+  width: 100vw;
 
   ${above.md`
     height: 100vh;
-    width: 50vh;
+    width: 50vw;
   `}
 `
 

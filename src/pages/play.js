@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
-import { Link } from 'gatsby'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
-import { graphql, navigate } from 'gatsby'
+import { navigate } from 'gatsby'
 
 // Components
 import Layout from '../components/layout'
@@ -11,7 +10,7 @@ import Main from '../components/main'
 
 // CSS
 import { above } from '../styles/mixins'
-import { colours, spacing, timings } from '../styles/variables'
+import { colours, spacing } from '../styles/variables'
 import { BaseLink, WhiteContainer, BlackContainer } from '../styles/global'
 
 
