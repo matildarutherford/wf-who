@@ -6,13 +6,6 @@ module.exports = {
     description: 'IE Baby Face Competition'
   },
   plugins: [
-    {
-      resolve: 'gatsby-source-filesystem',
-      options: {
-        name: 'src/images',
-        path: path.join(__dirname, 'src', 'images'),
-      },
-    },
     'gatsby-transformer-sharp',
     'gatsby-plugin-sharp',
     'gatsby-transformer-json',
