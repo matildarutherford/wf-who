@@ -1,0 +1,9 @@
+{
+  "photos": [{
+    "name": "David Johnson",
+    "photo": "david-johnson.jpg"
+  },{
+    "name": "Matilda Rutherford",
+    "photo": "matilda-rutherford.jpg"
+  }]
+}
