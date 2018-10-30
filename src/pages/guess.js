@@ -3,7 +3,6 @@ import { Link } from 'gatsby'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
 import { graphql } from 'gatsby'
-import hash from 'object-hash'
 
 // Components
 import Layout from '../components/layout'
