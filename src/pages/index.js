@@ -15,7 +15,7 @@ const IndexPage = () => (
   <Layout>
     <Main>
       <AboutLink to="/about">About</AboutLink>
-      <DonateLink href="https://moteam.co/ie-mos" target="_blank">Donate</DonateLink>
+      <DonateLink href="https://mosista.co/13821510" target="_blank">Donate</DonateLink>
       <PlayLink to="/play">Play</PlayLink>
       <WhiteContainer>
         <Heading>Baby</Heading>
