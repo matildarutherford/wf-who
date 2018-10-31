@@ -8,7 +8,6 @@ import { navigate } from 'gatsby'
 import Layout from '../components/layout'
 import Main from '../components/main'
 
-
 // CSS
 import { colours, timings } from '../styles/variables'
 import { above } from '../styles/mixins'
