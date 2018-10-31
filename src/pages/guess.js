@@ -165,8 +165,12 @@ const SubmitLink = styled(NextLink)``
 
 const BackLink = styled(BaseLink)`
   bottom: 0;
-  color: ${colours.black};
+  color: ${colours.white};
   left: 0;
+
+  ${above.md`
+    color: ${colours.black};
+  `}
 `
 
 const NamesList = styled.ul`
@@ -211,7 +215,7 @@ const GuessButton = styled.button`
   border: none;
   color: currentColor;
   font-family: 'Gotham Book', sans-serif;
-  font-size: .8rem;
+  font-size: 1rem;
   font-weight: normal;
   outline: none;
   text-decoration: none;
