@@ -16,6 +16,13 @@ module.exports = {
         name: 'data',
       },
     },
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        path: path.join(__dirname, 'src', 'images'),
+        name: 'images',
+      },
+    },
     'gatsby-plugin-react-helmet',
     {
       resolve: `gatsby-plugin-manifest`,

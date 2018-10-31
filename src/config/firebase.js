@@ -1,7 +1,7 @@
-import * as firebase from 'firebase/app';
-import 'firebase/database';
+import firebase from '@firebase/app';
+import '@firebase/firestore'
 
-const FirebaseConfig = {
+const config = {
   apiKey: 'AIzaSyADwa4-f0qs3ZKeVAFJGm9v1Tn60_eFl9A',
   authDomain: 'baby-face-f2ed1.firebaseapp.com',
   databaseURL: 'https://baby-face-f2ed1.firebaseio.com',
@@ -10,8 +10,11 @@ const FirebaseConfig = {
   messagingSenderId: '507192488721'
 };
 
-firebase.initializeApp(FirebaseConfig);
+firebase.initializeApp(config);
 
-const databaseRef = firebase.database().ref();
+export const db = firebase.firestore();
 
-export const guessesRef = databaseRef.child('guesses');
+const settings = {
+  timestampsInSnapshots: true
+};
+db.settings(settings);

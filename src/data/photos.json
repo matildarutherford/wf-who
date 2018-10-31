@@ -2,95 +2,95 @@
   "photos": [
     {
       "name": "Kristy Briggs",
-      "photo": "01.jpg"
+      "file": "01.jpg"
     },
     {
       "name": "Varun Joshi",
-      "photo": "02.jpg"
+      "file": "02.jpg"
     },
     {
       "name": "Robbie Turner",
-      "photo": "03.jpg"
+      "file": "03.jpg"
     },
     {
       "name": "Aimi Hino",
-      "photo": "04.jpg"
+      "file": "04.jpg"
     },
     {
       "name": "Cassie Chorn",
-      "photo": "05.jpg"
+      "file": "05.jpg"
     },
     {
       "name": "Fletcher Lodwick",
-      "photo": "06.jpg"
+      "file": "06.jpg"
     },
     {
       "name": "Christian Hagelid",
-      "photo": "07.jpg"
+      "file": "07.jpg"
     },
     {
       "name": "Jade Deutrom",
-      "photo": "08.jpg"
+      "file": "08.jpg"
     },
     {
       "name": "Dave Johnson",
-      "photo": "09.jpg"
+      "file": "09.jpg"
     },
     {
       "name": "Isabelle Jones",
-      "photo": "10.jpg"
+      "file": "10.jpg"
     },
     {
       "name": "Jared Mericka",
-      "photo": "11.jpg"
+      "file": "11.jpg"
     },
     {
       "name": "Xian Yang Wong",
-      "photo": "12.jpg"
+      "file": "12.jpg"
     },
     {
       "name": "Caroline Downs",
-      "photo": "13.jpg"
+      "file": "13.jpg"
     },
     {
       "name": "Britt Horder",
-      "photo": "14.jpg"
+      "file": "14.jpg"
     },
     {
       "name": "Charlie Olsson",
-      "photo": "15.jpg"
+      "file": "15.jpg"
     },
     {
       "name": "Alex Ure",
-      "photo": "16.jpg"
+      "file": "16.jpg"
     },
     {
       "name": "Matilda Rutherford",
-      "photo": "17.jpg"
+      "file": "17.jpg"
     },
     {
       "name": "Ruth Hallett",
-      "photo": "18.jpg"
+      "file": "18.jpg"
     },
     {
       "name": "Daniel Sterry",
-      "photo": "19.jpg"
+      "file": "19.jpg"
     },
     {
       "name": "Quincy Mazel",
-      "photo": "20.jpg"
+      "file": "20.jpg"
     },
     {
       "name": "Shane Handley",
-      "photo": "21.jpg"
+      "file": "21.jpg"
     },
     {
       "name": "Andi Han",
-      "photo": "22.jpg"
+      "file": "22.jpg"
     },
     {
       "name": "Gwendolyn Silk",
-      "photo": "23.jpg"
+      "file": "23.jpg"
     }
   ]
 }
