@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import { db } from '../config/firebase'
+import { connect } from 'react-redux'
 
 // Components
 import Layout from '../components/layout'
@@ -17,7 +18,8 @@ class GuessPage extends Component {
     this.state = {
       names: [],
       photos: [],
-      currentPhoto: 0
+      currentPhoto: 0,
+      loaded: false
     };
   }
 
@@ -31,15 +33,27 @@ class GuessPage extends Component {
   componentDidMount() {
     db.collection('photos').get().then((snapshot) => {
       snapshot.forEach((doc) => {
-        this.setState({ names: [...this.state.names, doc.data().name ], photos: [...this.state.photos, doc.data().photo ] });
+        this.setState({ names: [...this.state.names, doc.data().name ], photos: [...this.state.photos, {
+          id: doc.id,
+          photo: doc.data().photo
+        }]});
       })
     }).then(() => {
-      this.setState({ photos: this.shuffle(this.state.photos) });
+      this.setState({ loaded: true, photos: this.shuffle(this.state.photos) });
     });
   }
 
   guess(value) {
-    this.setState({ currentPhoto: this.state.currentPhoto+1 });
+    db.collection('guesses').doc(this.props.name).collection('guesses').add({
+      photo: this.state.photos[this.state.currentPhoto].id,
+      name: value
+    });
+
+    if (this.state.currentPhoto < this.state.photos.length-1) {
+      this.setState({ currentPhoto: this.state.currentPhoto+1 });
+    } else {
+      this.setState({ currentPhoto: 0 });
+    }
   }
 
   render() {
@@ -49,7 +63,7 @@ class GuessPage extends Component {
           <PlayLink to="/play">Play</PlayLink>
           <WhiteContainerCenter>
             <ImageContainer>
-              <Image src={this.state.photos[this.state.currentPhoto]}/>
+              {this.state.loaded ? (<Image src={this.state.photos[this.state.currentPhoto].photo}/>) : null}
             </ImageContainer>
           </WhiteContainerCenter>
           <BlackContainer>
@@ -65,8 +79,16 @@ class GuessPage extends Component {
   }
 }
 
-export default GuessPage
 
+const mapStateToProps = state => {
+  return {
+    name: state.name
+  }
+}
+
+export default connect(
+  mapStateToProps
+)(GuessPage)
 
 const WhiteContainerCenter = styled(WhiteContainer)`
   align-items: center;

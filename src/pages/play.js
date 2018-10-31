@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
+import { connect } from 'react-redux'
 import { navigate } from 'gatsby'
 
 // Components
@@ -14,29 +15,23 @@ import { BaseLink, WhiteContainer, BlackContainer } from '../styles/global'
 
 
 class PlayPage extends Component {
-  constructor() {
-    super();
-    this.state = {
-      name: null
-    };
-  }
-
   componentDidMount() {
     this.nameInput.focus();
   }
 
   render() {
+    const { name, register } = this.props;
     return (
       <Layout>
         <Main>
-          {this.state.name ? (<GuessLink to="/guess">Next</GuessLink>) : null}
+          {name ? (<GuessLink to="/guess">Next</GuessLink>) : null}
 
           <WhiteContainer>
             <SubHeading>Your name</SubHeading>
           </WhiteContainer>
           <BlackContainer>
             <form method="post" onSubmit={(e) => { e.preventDefault(); return navigate('/guess');}}>
-              <Input type="text" name="name" ref={(input) => { this.nameInput = input; }} value={this.state.name} onChange={(e) => { this.setState({ name: e.target.value })}}/>
+              <Input type="text" name="name" ref={(input) => { this.nameInput = input; }} value={name} onChange={(e) => register(e.target.value)}/>
             </form>
           </BlackContainer>
         </Main>
@@ -45,7 +40,27 @@ class PlayPage extends Component {
   }
 }
 
-export default PlayPage
+const mapStateToProps = state => {
+  return {
+    name: state.name
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    register: (name) =>
+      dispatch({
+        type: 'REGISTER',
+        name: name
+      })
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PlayPage)
+
 
 const Input = styled.input`
   background: ${colours.black};
