@@ -217,6 +217,7 @@ const GuessButton = styled.button`
   font-family: 'Gotham Book', sans-serif;
   font-size: 1rem;
   font-weight: normal;
+  line-height: 1.5;
   outline: none;
   text-decoration: none;
   transition: color ${timings.sm}s ease-in-out;
