@@ -17,6 +17,7 @@ class GuessPage extends Component {
     super();
     this.state = {
       names: [],
+      guesses: [],
       photos: [],
       currentPhoto: 0,
       loaded: false
@@ -44,6 +45,8 @@ class GuessPage extends Component {
   }
 
   guess(value) {
+    this.setState({ guesses: [...this.state.guesses, value]});
+
     db.collection('guesses').doc(this.props.name).collection('guesses').add({
       photo: this.state.photos[this.state.currentPhoto].id,
       name: value
@@ -69,7 +72,7 @@ class GuessPage extends Component {
           <BlackContainer>
             <NamesList>
               {this.state.names.map((name, index) => {
-                return (<NamesListItem key={index}><button onClick={() => this.guess(name)}>{ name }</button></NamesListItem>);
+                return (<NamesListItem key={index}><button disabled={this.state.guesses.includes(name)} onClick={() => this.guess(name)}>{ name }</button></NamesListItem>);
               })}
             </NamesList>
           </BlackContainer>
