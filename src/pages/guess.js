@@ -20,7 +20,8 @@ class GuessPage extends Component {
       guesses: [],
       photos: [],
       currentPhoto: 0,
-      loaded: false
+      loaded: false,
+      collectionId: `session-${new Date().getTime()}`
     };
   }
 
@@ -47,7 +48,7 @@ class GuessPage extends Component {
   guess(value) {
     this.setState({ guesses: [...this.state.guesses, value]});
 
-    db.collection('guesses').doc(this.props.name).collection('guesses').add({
+    db.collection('guesses').doc(this.props.name).collection(this.state.collectionId).add({
       photo: this.state.photos[this.state.currentPhoto].id,
       name: value
     });
@@ -57,6 +58,8 @@ class GuessPage extends Component {
     } else {
       this.setState({ currentPhoto: 0 });
     }
+
+    // TODO - When parsing results, find a) complete collection b) ordered by timestamp
   }
 
   render() {
