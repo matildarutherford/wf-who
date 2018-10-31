@@ -94,7 +94,7 @@ export const GlobalStyle = createGlobalStyle`
 export const baseLinkStyles = css`
   display: block;
   font-family: Gotham, sans-serif;
-  font-size: 2.125rem;
+  font-size: 1.75rem;
   font-weight: bold;
   padding: ${spacing.default};
   position: absolute;
@@ -106,6 +106,10 @@ export const baseLinkStyles = css`
     color: ${colours.gold};
     font-style: italic;
   }
+
+  ${above.md`
+    font-size: 2.125rem;
+  `}
 `
 
 export const BaseLink = styled(Link)`

@@ -66,7 +66,9 @@ class GuessPage extends Component {
     }
   }
 
-  next() {
+  next(e) {
+    e.preventDefault();
+
     if (this.state.currentPhoto < this.state.photos.length-1) {
       this.setState((prevState) => ({ currentPhoto: prevState.currentPhoto+1 }));
     } else {
@@ -168,14 +170,25 @@ const BackLink = styled(BaseLink)`
 `
 
 const NamesList = styled.ul`
-  columns: 2;
+  columns: 3;
   display: block;
-  width: 66%;
+  width: 100%;
+
+  ${above.md`
+    columns: 2;
+    width: 66%;
+  `}
 `
 
 const NamesListItem = styled.li`
   display: block;
-  line-height: 3;
+  line-height: 2;
+  text-align: center;
+
+  ${above.md`
+    line-height: 3;
+    text-align: left;
+  `}
 `
 
 const Heading = styled.h4`
@@ -198,7 +211,7 @@ const GuessButton = styled.button`
   border: none;
   color: currentColor;
   font-family: 'Gotham Book', sans-serif;
-  font-size: 1rem;
+  font-size: .8rem;
   font-weight: normal;
   outline: none;
   text-decoration: none;
@@ -224,7 +237,14 @@ const ImageContainer = styled.div`
 `
 
 const Image = styled.img`
-  height: auto;
-  max-height: 80%;
-  width: 100%;
+  display: block;
+  height: inherit !important;
+  margin: 0 auto;
+  max-height: 40vh;
+  max-width: 100%;
+  width: auto;
+
+  ${above.md`
+    max-height: 80vh;
+  `}
 `
