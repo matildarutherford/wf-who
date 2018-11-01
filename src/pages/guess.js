@@ -37,14 +37,15 @@ class GuessPage extends Component {
     if (this.props.name === '') {
       return navigate('/play');
     }
-    
+
     db.collection('photos').get().then((snapshot) => {
       snapshot.forEach((doc) => {
         this.setState((prevState) => ({
           names: [...prevState.names, doc.data().name],
           photos: [...prevState.photos, {
             id: doc.id,
-            photo: doc.data().photo
+            photo: doc.data().photo,
+            guessed: false
           }]
         }));
       })
@@ -72,7 +73,7 @@ class GuessPage extends Component {
   }
 
   next(e) {
-    e.preventDefault();
+    if (e) e.preventDefault();
 
     if (this.state.currentPhoto < this.state.photos.length-1) {
       this.setState((prevState) => ({ currentPhoto: prevState.currentPhoto+1 }));
@@ -87,18 +88,27 @@ class GuessPage extends Component {
       name: value
     };
 
-    this.setState((prevState) => ({ guesses: [...prevState.guesses, guess]}));
+    const photos = this.state.photos;
+    photos[this.state.currentPhoto].guessed = true;
+
+    this.setState((prevState) => ({
+      guesses: [...prevState.guesses, guess],
+      photos: photos
+    }));
 
     db.collection('guesses').doc(this.props.name).collection(this.state.collectionId).add(guess).then(() => {
       // Loading?
     });
 
-    this.next();
+    setTimeout(() => this.next(), timings.xl * 1200);
+    //this.next();
 
     // TODO - When parsing results, find a) complete collection b) ordered by timestamp
   }
 
   render() {
+    const currentPhoto = this.state.photos[this.state.currentPhoto];
+    console.log(currentPhoto);
     return (
       <Layout>
         <Main>
@@ -108,7 +118,7 @@ class GuessPage extends Component {
           <WhiteContainerCenter>
             <Heading right bottom>Baby</Heading>
             <ImageContainer>
-              {this.state.loaded ? (<Image src={this.state.photos[this.state.currentPhoto].photo}/>) : null}
+              {this.state.loaded ? (<Image greyscale={currentPhoto.guessed} src={currentPhoto.photo}/>) : null}
             </ImageContainer>
           </WhiteContainerCenter>
           <BlackContainerCenter>
@@ -195,14 +205,14 @@ const NamesListItem = styled.li`
   text-align: center;
 
   ${above.md`
-    line-height: 3;
+    line-height: 2.5;
     text-align: left;
   `}
 `
 
 const Heading = styled.h4`
   position: absolute;
-  font-size: 2rem;
+  font-size: 2.125rem;
   transform: translateY(-50%);
   ${props => props.bottom ? 'bottom: -1rem;' : ''}
   ${props => props.top ? 'top: 2rem;' : ''}
@@ -253,9 +263,13 @@ const Image = styled.img`
   margin: 0 auto;
   max-height: 40vh;
   max-width: 100%;
+  transition: filter ${timings.xl}s ease-in-out;
   width: auto;
+  will-change: filter;
 
   ${above.md`
     max-height: 80vh;
   `}
+
+  ${props => props.greyscale ? 'filter: grayscale(100%);' : ''}
 `

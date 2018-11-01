@@ -7,8 +7,8 @@ export const colours = {
 export const timings = {
   sm: .1,
   md: .2,
-  lg: .3,
-  xl: .5
+  lg: .5,
+  xl: 0.85
 }
 
 export const spacing = {
