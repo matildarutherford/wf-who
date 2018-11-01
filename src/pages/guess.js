@@ -34,6 +34,10 @@ class GuessPage extends Component {
   }
 
   componentDidMount() {
+    if (this.props.name === '') {
+      return navigate('/play');
+    }
+    
     db.collection('photos').get().then((snapshot) => {
       snapshot.forEach((doc) => {
         this.setState((prevState) => ({
@@ -58,11 +62,12 @@ class GuessPage extends Component {
   }
 
   back(e) {
+    e.preventDefault();
+
     if (this.state.currentPhoto > 0) {
-      e.preventDefault();
       this.setState((prevState) => ({ currentPhoto: prevState.currentPhoto-1 }));
     } else {
-      navigate('/play');
+      this.setState((prevState) => ({ currentPhoto: this.state.photos.length-1 }));
     }
   }
 
@@ -97,7 +102,7 @@ class GuessPage extends Component {
     return (
       <Layout>
         <Main>
-          {this.state.loaded ? <BackLink to="/play" onClick={() => this.back()}>Back</BackLink> : null}
+          {this.state.loaded ? <BackLink to="/guess" onClick={(e) => this.back(e)}>Back</BackLink> : null}
           {this.state.loaded && !this.hasFinished() ? <NextLink to="/guess" onClick={(e) => this.next(e)}>Next</NextLink> : null}
           {this.state.loaded && this.hasFinished() ? <SubmitLink to="/thanks">Submit</SubmitLink> : null}
           <WhiteContainerCenter>
@@ -230,6 +235,7 @@ const GuessButton = styled.button`
 
   &[disabled] {
     color: ${colours.white};
+    cursor: not-allowed;
     font-style: normal;
     opacity: .5;
     text-decoration: line-through;
