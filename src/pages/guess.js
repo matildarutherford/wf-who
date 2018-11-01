@@ -235,7 +235,7 @@ const GuessButton = styled.button`
   line-height: 1.5;
   outline: none;
   text-decoration: none;
-  transition: color ${timings.sm}s ease-in-out;
+  transition: all ${timings.xl}s ease-in-out;
 
   &:hover {
     color: ${colours.gold};
