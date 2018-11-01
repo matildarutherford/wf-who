@@ -69,15 +69,12 @@ const Input = styled.input`
   border-right: 0;
   border-top: 0;
   color: ${colours.white};
+  font-family: 'Gotham Book', sans-serif;
   font-size: 2rem;
   min-width: 20rem;
   outline: 0;
-  padding: ${spacing.xs} ${spacing.default};
+  padding: ${spacing.xs};
   text-align: center;
-
-  ${above.md`
-    text-align: left;
-  `}
 `
 
 const GuessLink = styled(BaseLink)`

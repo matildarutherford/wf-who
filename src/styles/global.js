@@ -132,25 +132,27 @@ export const BaseContainer = styled.section`
 `
 
 export const WhiteContainer = styled(BaseContainer)`
-  align-items: flex-end;
+  align-items: center;
   background-color: ${colours.white};
   color: ${colours.black};
-  justify-content: center;
+  flex-direction: column;
+  justify-content: flex-end;
 
   ${above.md`
-    align-items: center;
-    justify-content: flex-end;
+    align-items: flex-end;
+    justify-content: center;
   `}
 `
 
 export const BlackContainer = styled(BaseContainer)`
-  align-items: flex-start;
-  justify-content: center;
+  align-items: center;
   background-color: ${colours.black};
   color: ${colours.white};
+  flex-direction: column;
+  justify-content: flex-start;
 
   ${above.md`
-    align-items: center;
-    justify-content: flex-start;
+    align-items: flex-start;
+    justify-content: center;
   `}
 `
