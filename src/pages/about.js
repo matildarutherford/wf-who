@@ -9,7 +9,7 @@ import Main from '../components/main'
 
 // CSS
 import { above } from '../styles/mixins'
-import { colours } from '../styles/variables'
+import { colours, timings } from '../styles/variables'
 import { baseLinkStyles, BaseLink, WhiteContainer, BlackContainer } from '../styles/global'
 
 const AboutPage = () => (
@@ -62,10 +62,15 @@ export default AboutPage
 const CloseLink = styled(BaseLink)`
   right: 0;
   top: 0;
+  transition: transform ${timings.md}s ease-in-out;
 
   ${above.md`
     filter: invert(100%);
   `}
+
+  &:hover {
+    transform: scale(1.1);
+  }
 `
 
 const DonateLink = styled.a`
