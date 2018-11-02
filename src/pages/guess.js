@@ -100,8 +100,6 @@ class GuessPage extends Component {
     db.collection('guesses').doc(this.props.documentId).collection('guesses').add(guess).then(() => {
       this.next();
     });
-
-    // TODO - When parsing results, find a) complete collection b) ordered by timestamp
   }
 
   render() {
