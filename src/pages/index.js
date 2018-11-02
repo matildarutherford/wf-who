@@ -5,7 +5,6 @@ import styled from 'styled-components'
 import Layout from '../components/layout'
 import Heading from '../components/heading'
 import Main from '../components/main'
-import ContainerTransition from '../components/containerTransition'
 
 // CSS
 import { above } from '../styles/mixins'
@@ -21,14 +20,10 @@ class IndexPage extends Component {
           <DonateLink href="https://mosista.co/13821510" target="_blank">Donate</DonateLink>
           <PlayLink to="/play">Play</PlayLink>
           <WhiteContainer>
-            <ContainerTransition direction="left">
-              <Heading>Baby</Heading>
-            </ContainerTransition>
+            <Heading>Baby</Heading>
           </WhiteContainer>
           <BlackContainer>
-            <ContainerTransition direction="right">
-              <Heading>Face</Heading>
-            </ContainerTransition>
+            <Heading>Face</Heading>
           </BlackContainer>
         </Main>
       </Layout>

@@ -6,7 +6,6 @@ import Obfuscate from 'react-obfuscate'
 import Layout from '../components/layout'
 import Heading from '../components/heading'
 import Main from '../components/main'
-import ContainerTransition from '../components/containerTransition'
 
 // CSS
 import { above } from '../styles/mixins'
@@ -31,32 +30,28 @@ const AboutPage = () => (
       <DonateLink href="https://mosista.co/13821510" target="_blank">Donate</DonateLink>
       <PlayLink to="/play">Play</PlayLink>
       <WhiteContainer>
-        <ContainerTransition direction="left">
-          <Heading>About</Heading>
-        </ContainerTransition>
+        <Heading>About</Heading>
       </WhiteContainer>
       <BlackContainer>
-        <ContainerTransition direction="right">
-          <Block>
-            <List>
-              <ListItem><span>Send your best baby picture to {' '}</span>
-                <Obfuscate
-                  email='matilda.rutherford@ie.com.au'
-                  headers={{
-                    subject: 'Baby Face'
-                  }}>@Matilda</Obfuscate>
-              </ListItem>
-              <ListItem>
-                <span>Make a small</span> donation <span>to Movember</span>
-              </ListItem>
-              <ListItem>
-                <span>Start</span> playing
-              </ListItem>
-            </List>
-            <Copy>Please only enter once and be a generous in your donations as you see fair (although a minimum $5 is preferred).</Copy>
+        <Block>
+          <List>
+            <ListItem><span>Send your best baby picture to {' '}</span>
+              <Obfuscate
+                email='matilda.rutherford@ie.com.au'
+                headers={{
+                  subject: 'Baby Face'
+                }}>@Matilda</Obfuscate>
+            </ListItem>
+            <ListItem>
+              <span>Make a small</span> donation <span>to Movember</span>
+            </ListItem>
+            <ListItem>
+              <span>Start</span> playing
+            </ListItem>
+          </List>
+          <Copy>Please only enter once and be a generous in your donations as you see fair (although a minimum $5 is preferred).</Copy>
              <Copy>The winner with the most correct answers will be announced at All Agency on the 30th November.</Copy>
-          </Block>
-        </ContainerTransition>
+        </Block>
       </BlackContainer>
     </Main>
   </Layout>

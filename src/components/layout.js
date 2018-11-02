@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import { StaticQuery } from 'gatsby'
-import PageTransition from 'gatsby-plugin-page-transitions'
 
 // Styles
 import { GlobalStyle } from '../styles/global.js'
@@ -28,18 +27,8 @@ const Layout = ({ children }) => (
         >
           <html lang="en" />
         </Helmet>
-        <PageTransition
-          defaultStyle={{
-            opacity: '1'
-          }}
-          transitionStyles={{
-            entering: { opacity: '1' },
-            entered: { opacity: '1' },
-            exiting: { opacity: '1' },
-          }}>
-          <GlobalStyle/>
-            {children}
-        </PageTransition>
+        <GlobalStyle/>
+          {children}
       </>
     )}
   />
