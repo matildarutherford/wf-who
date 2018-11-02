@@ -21,7 +21,8 @@ class GuessPage extends Component {
       guesses: [],
       photos: [],
       currentPhoto: 0,
-      loaded: false
+      loaded: false,
+      finished: false
     };
   }
 
@@ -92,7 +93,8 @@ class GuessPage extends Component {
 
     this.setState((prevState) => ({
       guesses: [...prevState.guesses, guess],
-      photos: photos
+      photos: photos,
+      finished: prevState.guesses.length === prevState.photos.length-1
     }));
 
     db.collection('guesses').doc(this.props.documentId).collection('guesses').add(guess).then(() => {
@@ -114,7 +116,7 @@ class GuessPage extends Component {
           <WhiteContainerCenter>
             <Heading right bottom>Baby</Heading>
             <ImageContainer>
-              {this.state.loaded ? (<Image greyscale={currentPhoto.guessed} src={currentPhoto.photo}/>) : null}
+              {this.state.loaded && !this.state.finished ? (<Image greyscale={currentPhoto.guessed} src={currentPhoto.photo}/>) : null}
             </ImageContainer>
           </WhiteContainerCenter>
           <BlackContainerCenter>

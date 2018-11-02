@@ -8,8 +8,6 @@ import Heading from '../components/heading'
 import Main from '../components/main'
 
 // CSS
-import { above } from '../styles/mixins'
-import { colours, timings } from '../styles/variables'
 import { WhiteContainer, BlackContainer } from '../styles/global'
 
 class StatsPage extends Component {
@@ -61,7 +59,7 @@ class StatsPage extends Component {
 
         // Compare this session's guesses with actual and calculate total
         guess.correct = this.state.photos.filter((photo) => {
-          return guess.guesses.some((e) => e.photo === photo.id && e.name == photo.name);
+          return guess.guesses.some((e) => e.photo === photo.id && e.name === photo.name);
         }).length;
 
         // Bump parsed state
