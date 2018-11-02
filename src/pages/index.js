@@ -1,31 +1,41 @@
-import React from 'react'
+import React, { Component } from 'react'
 import styled from 'styled-components'
 
 // Components
 import Layout from '../components/layout'
 import Heading from '../components/heading'
 import Main from '../components/main'
+import ContainerTransition from '../components/containerTransition'
 
 // CSS
 import { above } from '../styles/mixins'
 import { colours } from '../styles/variables'
 import { baseLinkStyles, BaseLink, WhiteContainer, BlackContainer } from '../styles/global'
 
-const IndexPage = () => (
-  <Layout>
-    <Main>
-      <AboutLink to="/about">About</AboutLink>
-      <DonateLink href="https://mosista.co/13821510" target="_blank">Donate</DonateLink>
-      <PlayLink to="/play">Play</PlayLink>
-      <WhiteContainer>
-        <Heading>Baby</Heading>
-      </WhiteContainer>
-      <BlackContainer>
-        <Heading>Face</Heading>
-      </BlackContainer>
-    </Main>
-  </Layout>
-)
+class IndexPage extends Component {
+  render() {
+    return(
+      <Layout>
+        <Main>
+          <AboutLink to="/about">About</AboutLink>
+          <DonateLink href="https://mosista.co/13821510" target="_blank">Donate</DonateLink>
+          <PlayLink to="/play">Play</PlayLink>
+          <WhiteContainer>
+            <ContainerTransition direction="left">
+              <Heading>Baby</Heading>
+            </ContainerTransition>
+          </WhiteContainer>
+          <BlackContainer>
+            <ContainerTransition direction="right">
+              <Heading>Face</Heading>
+            </ContainerTransition>
+          </BlackContainer>
+        </Main>
+      </Layout>
+    );
+  }
+}
+
 
 export default IndexPage
 

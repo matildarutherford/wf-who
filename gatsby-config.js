@@ -6,6 +6,12 @@ module.exports = {
     description: 'IE Baby Face Competition'
   },
   plugins: [
+    {
+      resolve: 'gatsby-plugin-page-transitions',
+      options: {
+        transitionTime: 500
+      }
+    },
     'gatsby-transformer-sharp',
     'gatsby-plugin-sharp',
     'gatsby-transformer-json',

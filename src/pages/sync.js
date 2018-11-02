@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import Layout from '../components/layout'
-import { graphql } from 'gatsby'
 import { db } from '../config/firebase'
 import styled from 'styled-components'
 

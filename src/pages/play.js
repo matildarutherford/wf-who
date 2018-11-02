@@ -9,7 +9,6 @@ import SubHeading from '../components/subheading'
 import Main from '../components/main'
 
 // CSS
-import { above } from '../styles/mixins'
 import { colours, spacing } from '../styles/variables'
 import { BaseLink, WhiteContainer, BlackContainer } from '../styles/global'
 
