@@ -21,7 +21,7 @@ export default IndexPage
 const WhiteContainerFull = styled(WhiteContainer)`
   ${above.md`
     width: 100vw;
-    justify-content: center;
+    align-items: center;
   `}
 `
 
