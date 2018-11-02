@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
+import { db } from '../config/firebase'
 import { connect } from 'react-redux'
 import { navigate } from 'gatsby'
 
@@ -18,8 +19,19 @@ class PlayPage extends Component {
     this.nameInput.focus();
   }
 
+  createDocument(e, callback) {
+    e.preventDefault();
+    db.collection('guesses').add({
+      name: this.props.name
+    }).then((docRef) => {
+      callback(docRef.id);
+      navigate('/guess');
+    });
+  }
+
   render() {
-    const { name, register } = this.props;
+    const { name, register, saveDocumentId } = this.props;
+
     return (
       <Layout>
         <Main>
@@ -29,7 +41,7 @@ class PlayPage extends Component {
             <SubHeading>Your name</SubHeading>
           </WhiteContainer>
           <BlackContainer>
-            <form method="post" onSubmit={(e) => { e.preventDefault(); return navigate('/guess');}}>
+            <form method="post" onSubmit={(e) => this.createDocument(e, saveDocumentId)}>
               <Input type="text" name="name" ref={(input) => { this.nameInput = input; }} value={name} onChange={(e) => register(e.target.value)}/>
             </form>
           </BlackContainer>
@@ -41,12 +53,18 @@ class PlayPage extends Component {
 
 const mapStateToProps = state => {
   return {
-    name: state.name
+    name: state.name,
+    documentId: state.documentId
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
+    saveDocumentId: (documentId) =>
+      dispatch({
+        type: 'DOCUMENT_SAVE',
+        documentId: documentId
+      }),
     register: (name) =>
       dispatch({
         type: 'REGISTER',

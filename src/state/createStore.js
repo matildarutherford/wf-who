@@ -7,6 +7,12 @@ const reducer = (state, action) => {
     });
   }
 
+  if (action.type === `DOCUMENT_SAVE`) {
+    return Object.assign({}, state, {
+      documentId: action.documentId
+    });
+  }
+
   return state
 }
 

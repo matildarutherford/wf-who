@@ -21,8 +21,7 @@ class GuessPage extends Component {
       guesses: [],
       photos: [],
       currentPhoto: 0,
-      loaded: false,
-      collectionId: `session-${new Date().getTime()}`
+      loaded: false
     };
   }
 
@@ -96,19 +95,16 @@ class GuessPage extends Component {
       photos: photos
     }));
 
-    db.collection('guesses').doc(this.props.name).collection(this.state.collectionId).add(guess).then(() => {
-      // Loading?
+    db.collection('guesses').doc(this.props.documentId).collection('guesses').add(guess).then(() => {
+      this.next();
     });
-
-    setTimeout(() => this.next(), timings.xl * 1200);
-    //this.next();
 
     // TODO - When parsing results, find a) complete collection b) ordered by timestamp
   }
 
   render() {
     const currentPhoto = this.state.photos[this.state.currentPhoto];
-    console.log(currentPhoto);
+
     return (
       <Layout>
         <Main>
@@ -142,7 +138,8 @@ class GuessPage extends Component {
 
 const mapStateToProps = state => {
   return {
-    name: state.name
+    name: state.name,
+    documentId: state.documentId
   }
 }
 
@@ -235,7 +232,7 @@ const GuessButton = styled.button`
   line-height: 1.5;
   outline: none;
   text-decoration: none;
-  transition: all ${timings.xl}s ease-in-out;
+  transition: all ${timings.lg}s ease-in-out;
 
   &:hover {
     color: ${colours.gold};
@@ -263,7 +260,6 @@ const Image = styled.img`
   margin: 0 auto;
   max-height: 40vh;
   max-width: 100%;
-  transition: filter ${timings.xl}s ease-in-out;
   width: auto;
   will-change: filter;
 
