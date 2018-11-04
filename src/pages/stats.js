@@ -6,6 +6,8 @@ import styled from 'styled-components'
 import Layout from '../components/layout'
 import Heading from '../components/heading'
 import Main from '../components/main'
+import Preloader from '../components/preloader'
+import Moustache from '../components/moustache'
 
 // CSS
 import { WhiteContainer, BlackContainer } from '../styles/global'
@@ -17,7 +19,8 @@ class StatsPage extends Component {
       photos: [],
       guesses: [],
       parsed: 0,
-      finished: false
+      loaded: false,
+      loading: true
     }
   }
 
@@ -39,7 +42,7 @@ class StatsPage extends Component {
       });
 
       this.setState((prevState) => {
-        return { guesses: filteredGuesses, finished: true }
+        return { guesses: filteredGuesses, loaded: true, loading: false }
       });
     }
   }
@@ -87,12 +90,14 @@ class StatsPage extends Component {
   render() {
     return (<Layout>
       <Main>
+        <Preloader loading={this.state.loading} loaded={this.state.loaded}/>
+        {!this.state.loaded?(<Moustache/>):false}
         <WhiteContainer>
-          <Heading>Winners</Heading>
+          {this.state.loaded? (<Heading>Winners</Heading>) : false}
         </WhiteContainer>
         <BlackContainer>
           <List>
-            {this.state.finished && this.state.guesses.sort(this.sortGuesses).map((guess, index) => {
+            {this.state.loaded && this.state.guesses.sort(this.sortGuesses).map((guess, index) => {
               return (<ListItem key={index}>{guess.name} - {guess.correct}/{this.state.photos.length}</ListItem>);
             })}
           </List>
