@@ -96,6 +96,7 @@ export const baseLinkStyles = css`
   font-family: Gotham, sans-serif;
   font-size: 1.75rem;
   font-weight: bold;
+  line-height: .5;
   padding: ${spacing.default};
   position: absolute;
   text-decoration: none;

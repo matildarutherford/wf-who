@@ -7,6 +7,8 @@ import { navigate } from 'gatsby'
 // Components
 import Layout from '../components/layout'
 import Main from '../components/main'
+import Preloader from '../components/preloader'
+import Moustache from '../components/moustache'
 
 // CSS
 import { colours, timings } from '../styles/variables'
@@ -22,6 +24,7 @@ class GuessPage extends Component {
       photos: [],
       currentPhoto: 0,
       loaded: false,
+      loading: true,
       finished: false
     };
   }
@@ -102,28 +105,39 @@ class GuessPage extends Component {
     });
   }
 
+  isCurrentPhoto(name) {
+    const currentPhoto = this.state.photos[this.state.currentPhoto];
+    const guess = this.state.guesses.filter((guess) => guess.name === name)[0];
+
+    if (guess && currentPhoto) {
+      return currentPhoto.id === guess.photo;
+    }
+
+    return false;
+  }
+
   render() {
     const currentPhoto = this.state.photos[this.state.currentPhoto];
 
     return (
       <Layout>
         <Main>
+          <Preloader loading={this.state.loading} loaded={this.state.loaded}/>
+          <Moustache/>
           {this.state.loaded ? <BackLink to="/guess" onClick={(e) => this.back(e)}>Back</BackLink> : null}
           {this.state.loaded && !this.hasFinished() ? <NextLink to="/guess" onClick={(e) => this.next(e)}>Next</NextLink> : null}
           {this.state.loaded && this.hasFinished() ? <SubmitLink to="/thanks">Submit</SubmitLink> : null}
           <WhiteContainerCenter>
-            <Heading right bottom>Baby</Heading>
             <ImageContainer>
               {this.state.loaded && !this.state.finished ? (<Image greyscale={currentPhoto.guessed} src={currentPhoto.photo}/>) : null}
             </ImageContainer>
           </WhiteContainerCenter>
           <BlackContainerCenter>
-            <Heading left top>Face</Heading>
             <NamesList>
               {this.state.names.map((name, index) => {
                 return (
                   <NamesListItem key={index}>
-                    <GuessButton disabled={this.state.guesses.filter((guess) => guess.name === name).length} onClick={() => this.guess(name)}>{ name }</GuessButton>
+                    <GuessButton className={ this.isCurrentPhoto(name) ? 'active' : ''} disabled={this.state.guesses.filter((guess) => guess.name === name).length} onClick={() => this.guess(name)}>{ name }</GuessButton>
                   </NamesListItem>
                 );
               })}
@@ -171,6 +185,7 @@ const NextLink = styled(BaseLink)`
   bottom: 0;
   color: ${colours.white};
   right: 0;
+
 `
 
 const SubmitLink = styled(NextLink)``
@@ -179,6 +194,7 @@ const BackLink = styled(BaseLink)`
   bottom: 0;
   color: ${colours.white};
   left: 0;
+
 
   ${above.md`
     color: ${colours.black};
@@ -198,27 +214,12 @@ const NamesList = styled.ul`
 
 const NamesListItem = styled.li`
   display: block;
-  line-height: 2;
+  line-height: 1.5;
   text-align: center;
 
   ${above.md`
-    line-height: 2.5;
+    line-height: 2;
     text-align: left;
-  `}
-`
-
-const Heading = styled.h4`
-  position: absolute;
-  font-size: 2.125rem;
-  transform: translateY(-50%);
-  ${props => props.bottom ? 'bottom: -1rem;' : ''}
-  ${props => props.top ? 'top: 2rem;' : ''}
-
-  ${above.md`
-    top: 50%;
-    bottom: auto;
-    ${props => props.right ? 'right: .5rem;' : ''}
-    ${props => props.left ? 'left: .5rem;' : ''}
   `}
 `
 
@@ -229,7 +230,7 @@ const GuessButton = styled.button`
   font-family: 'Gotham Book', sans-serif;
   font-size: 1rem;
   font-weight: normal;
-  line-height: 1.5;
+  line-height: 1;
   outline: none;
   text-decoration: none;
   transition: all ${timings.lg}s ease-in-out;
@@ -246,6 +247,12 @@ const GuessButton = styled.button`
     font-style: normal;
     opacity: .5;
     text-decoration: line-through;
+  }
+
+  &.active[disabled] {
+    color: ${colours.gold};
+    text-decoration: none;
+    opacity: 1;
   }
 `
 
