@@ -61,10 +61,12 @@ class StatsPage extends Component {
         });
 
         // Compare this session's guesses with actual and calculate total
-        guess.correct = this.state.photos.filter((photo) => {
-          return guess.guesses.some((e) => e.photo === photo.id && e.name === photo.name);
-        }).length;
-
+        if (guess) {
+          guess.correct = this.state.photos.filter((photo) => {
+            return guess.guesses.some((e) => e.photo === photo.id && e.name === photo.name);
+          }).length;
+        }
+        
         // Bump parsed state
         this.setState((prevState) => {
           return { parsed: prevState.parsed+1 }
