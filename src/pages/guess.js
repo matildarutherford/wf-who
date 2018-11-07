@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { db } from '../config/firebase'
 import { connect } from 'react-redux'
 import { navigate } from 'gatsby'
+import classNames from 'classnames'
 
 // Components
 import Layout from '../components/layout'
@@ -66,9 +67,11 @@ class GuessPage extends Component {
   }
 
   back(e) {
+    const { currentPhoto } = this.state;
+
     e.preventDefault();
 
-    if (this.state.currentPhoto > 0) {
+    if (currentPhoto > 0) {
       this.setState((prevState) => ({ currentPhoto: prevState.currentPhoto-1 }));
     } else {
       this.setState((prevState) => ({ currentPhoto: this.state.photos.length-1 }));
@@ -76,9 +79,11 @@ class GuessPage extends Component {
   }
 
   next(e) {
+    const { currentPhoto } = this.state;
+
     if (e) e.preventDefault();
 
-    if (this.state.currentPhoto < this.state.photos.length-1) {
+    if (currentPhoto < this.state.photos.length-1) {
       this.setState((prevState) => ({ currentPhoto: prevState.currentPhoto+1 }));
     } else {
       this.setState((prevState) => ({ currentPhoto: 0 }));
@@ -117,19 +122,20 @@ class GuessPage extends Component {
   }
 
   render() {
-    const currentPhoto = this.state.photos[this.state.currentPhoto];
+    const { photos, guesses, currentPhoto, loaded, finished } = this.state;
+    const current = photos[currentPhoto];
 
     return (
       <Layout>
         <Main>
           <Preloader loading={this.state.loading} loaded={this.state.loaded}/>
           <Moustache/>
-          {this.state.loaded ? <BackLink to="/guess" onClick={(e) => this.back(e)}>Back</BackLink> : null}
-          {this.state.loaded && !this.hasFinished() ? <NextLink to="/guess" onClick={(e) => this.next(e)}>Next</NextLink> : null}
-          {this.state.loaded && this.hasFinished() ? <SubmitLink to="/thanks">Submit</SubmitLink> : null}
+          {loaded ? <BackLink to="/guess" onClick={(e) => this.back(e)}>Back</BackLink> : null}
+          {loaded && !this.hasFinished() ? <NextLink to="/guess" onClick={(e) => this.next(e)}>Next</NextLink> : null}
+          {loaded && this.hasFinished() ? <SubmitLink to="/thanks">Submit</SubmitLink> : null}
           <WhiteContainerCenter>
             <ImageContainer>
-              {this.state.loaded && !this.state.finished ? (<Image greyscale={currentPhoto.guessed} src={currentPhoto.photo}/>) : null}
+              {loaded && !finished ? (<Image greyscale={current.guessed} src={current.photo}/>) : null}
             </ImageContainer>
           </WhiteContainerCenter>
           <BlackContainerCenter>
@@ -137,7 +143,7 @@ class GuessPage extends Component {
               {this.state.names.map((name, index) => {
                 return (
                   <NamesListItem key={index}>
-                    <GuessButton className={ this.isCurrentPhoto(name) ? 'active' : ''} disabled={this.state.guesses.filter((guess) => guess.name === name).length} onClick={() => this.guess(name)}>{ name }</GuessButton>
+                    <GuessButton className={ classNames({ 'active': this.isCurrentPhoto(name), 'unselectable': current.guessed}) } disabled={current.guessed || guesses.filter((guess) => guess.name === name).length} onClick={() => this.guess(name)}>{ name }</GuessButton>
                   </NamesListItem>
                 );
               })}
@@ -247,6 +253,11 @@ const GuessButton = styled.button`
     font-style: normal;
     opacity: .5;
     text-decoration: line-through;
+  }
+
+  &.unselectable[disabled] {
+    opacity: .5;
+    text-decoration: none;
   }
 
   &.active[disabled] {
