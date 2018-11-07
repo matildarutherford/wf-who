@@ -218,7 +218,7 @@ const NamesListItem = styled.li`
   text-align: center;
 
   ${above.md`
-    line-height: 2;
+    line-height: 1.75;
     text-align: left;
   `}
 `
