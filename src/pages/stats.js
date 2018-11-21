@@ -100,7 +100,7 @@ class StatsPage extends Component {
         <BlackContainer>
           <List>
             {this.state.loaded && this.state.guesses.filter(guess => guess.guesses.length > 0).sort(this.sortGuesses).map((guess, index) => {
-              return (<ListItem key={index}>{guess.name} - {guess.correct}/{guess.guesses.length} {Math.round(guess.correct/guess.guesses.length*100)}%</ListItem>);
+              return (<ListItem key={index}>{guess.name} - {guess.correct}/{guess.guesses.length} ({Math.round(guess.correct/guess.guesses.length*100)}%)</ListItem>);
             })}
           </List>
         </BlackContainer>
