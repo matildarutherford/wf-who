@@ -66,7 +66,7 @@ class StatsPage extends Component {
             return guess.guesses.some((e) => e.photo === photo.id && e.name === photo.name);
           }).length;
         }
-        
+
         // Bump parsed state
         this.setState((prevState) => {
           return { parsed: prevState.parsed+1 }
@@ -99,8 +99,8 @@ class StatsPage extends Component {
         </WhiteContainer>
         <BlackContainer>
           <List>
-            {this.state.loaded && this.state.guesses.sort(this.sortGuesses).map((guess, index) => {
-              return (<ListItem key={index}>{guess.name} - {guess.correct}/{this.state.photos.length}</ListItem>);
+            {this.state.loaded && this.state.guesses.filter(guess => guess.guesses.length > 0).sort(this.sortGuesses).map((guess, index) => {
+              return (<ListItem key={index}>{guess.name} - {guess.correct}/{guess.guesses.length} {Math.round(guess.correct/guess.guesses.length*100)}%</ListItem>);
             })}
           </List>
         </BlackContainer>
@@ -112,7 +112,8 @@ class StatsPage extends Component {
 export default StatsPage
 
 const List = styled.ol`
-
+  overflow: scroll;
+  height: 50vh;
 `
 const ListItem = styled.li`
 
