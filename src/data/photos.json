@@ -150,31 +150,31 @@
     },
     {
       "name": "Brad Pitt",
-      "file": "brad.jpg"
+      "file": "c2.jpg"
     },
     {
       "name": "Angelina Jolie",
-      "file": "ange.jpg"
+      "file": "c1.jpg"
     },
     {
       "name": "Kim Kardashian",
-      "file": "kim.jpg"
+      "file": "c4.jpg"
     },
     {
       "name": "Leonardo Dicaprio",
-      "file": "leo.jpg"
+      "file": "c3.jpg"
     },
     {
       "name": "Kanye West",
-      "file": "kanye.jpg"
+      "file": "c6.jpg"
     },
     {
       "name": "Victoria Beckham",
-      "file": "vic.jpg"
+      "file": "c7.jpg"
     },
     {
       "name": "George Clooney",
-      "file": "george.jpg"
+      "file": "c5.jpg"
     }
   ]
 }
