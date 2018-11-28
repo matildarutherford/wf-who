@@ -147,6 +147,34 @@
     {
       "name": "Amita Doshi",
       "file": "37.jpg"
+    },
+    {
+      "name": "Brad Pitt",
+      "file": "brad.jpg"
+    },
+    {
+      "name": "Angelina Jolie",
+      "file": "ange.jpg"
+    },
+    {
+      "name": "Kim Kardashian",
+      "file": "kim.jpg"
+    },
+    {
+      "name": "Leonardo Dicaprio",
+      "file": "leo.jpg"
+    },
+    {
+      "name": "Kanye West",
+      "file": "kanye.jpg"
+    },
+    {
+      "name": "Victoria Beckham",
+      "file": "vic.jpg"
+    },
+    {
+      "name": "George Clooney",
+      "file": "george.jpg"
     }
   ]
 }
