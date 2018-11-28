@@ -64,6 +64,11 @@ const CloseLink = styled(BaseLink)`
   top: 0;
   transition: transform ${timings.md}s ease-in-out;
 
+  svg {
+    width: 50px;
+    height: 50px;
+  }
+
   ${above.md`
     filter: invert(100%);
   `}
@@ -79,6 +84,7 @@ const DonateLink = styled.a`
   color: ${colours.white};
   left: 0;
 
+
   ${above.md`
     color: ${colours.black};
   `}
@@ -87,10 +93,15 @@ const DonateLink = styled.a`
 const PlayLink = styled(BaseLink)`
   bottom: 0;
   color: ${colours.white};
+
   right: 0;
 `
 
 const Block = styled.div`
+  ${above.md`
+    position: absolute;
+    top: calc(50% - 4.15rem);
+  `}
 `
 
 const List = styled.ol`
@@ -99,7 +110,8 @@ const List = styled.ol`
 `
 
 const ListItem = styled.li`
-  padding-left: 1rem;
+  padding-left: 1.7rem;
+  line-height: 1.4;
 
   span {
     font-family: 'Gotham Book';
@@ -117,6 +129,19 @@ const Copy = styled.p`
   font-family: 'Gotham Book';
   font-size: .8rem;
   opacity: .5;
-  margin: 0 0 0 2.8rem;
-  width: 65%;
+  margin: 0 0 1rem 3.5rem;
+  padding: 0;
+  display: inline-block;
+
+  ${above.sm`
+    width: 45%;
+  `}
+
+  ${above.md`
+    width: 65%;
+  `}
+
+  ${above.lg`
+    width: 45%;
+  `}
 `

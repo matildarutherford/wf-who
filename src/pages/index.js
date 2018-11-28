@@ -39,6 +39,7 @@ const AboutLink = styled(BaseLink)`
   right: 0;
   color: ${colours.black};
 
+
   ${above.md`
     color: ${colours.white};
   `}
@@ -50,6 +51,7 @@ const DonateLink = styled.a`
   bottom: 0;
   color: ${colours.white};
 
+
   ${above.md`
     color: ${colours.black};
   `}
@@ -59,4 +61,5 @@ const PlayLink = styled(BaseLink)`
   right: 0;
   bottom: 0;
   color: ${colours.white};
+
 `

@@ -8,6 +8,8 @@ import { navigate } from 'gatsby'
 import Layout from '../components/layout'
 import SubHeading from '../components/subheading'
 import Main from '../components/main'
+import Preloader from '../components/preloader'
+import Moustache from '../components/moustache'
 
 // CSS
 import { colours, spacing } from '../styles/variables'
@@ -15,12 +17,22 @@ import { BaseLink, WhiteContainer, BlackContainer } from '../styles/global'
 
 
 class PlayPage extends Component {
+  constructor() {
+    super();
+    this.state = {
+      loaded: true,
+      loading: false
+    };
+  }
   componentDidMount() {
     this.nameInput.focus();
   }
 
   createDocument(e, callback) {
     e.preventDefault();
+
+    this.setState({ loaded: false, loading: true });
+
     db.collection('guesses').add({
       name: this.props.name
     }).then((docRef) => {
@@ -31,19 +43,20 @@ class PlayPage extends Component {
 
   render() {
     const { name, register, saveDocumentId } = this.props;
-
     return (
       <Layout>
         <Main>
-          {name ? (<GuessLink to="/guess">Next</GuessLink>) : null}
-
+          <Preloader duration="2.0" loading={this.state.loading} loaded={this.state.loaded}/>
+          {this.state.loading?(<Moustache/>):false}
+          {this.state.loaded && name ? (<GuessLink to="/guess" onClick={((e) => this.createDocument(e, saveDocumentId))}>Next</GuessLink>) : null}
           <WhiteContainer>
-            <SubHeading>Your name</SubHeading>
+            {this.state.loaded? (<SubHeading>Your name</SubHeading>) : false}
           </WhiteContainer>
           <BlackContainer>
+            {this.state.loaded? (
             <form method="post" onSubmit={(e) => this.createDocument(e, saveDocumentId)}>
               <Input type="text" name="name" ref={(input) => { this.nameInput = input; }} value={name} onChange={(e) => register(e.target.value)}/>
-            </form>
+            </form>) : false}
           </BlackContainer>
         </Main>
       </Layout>
@@ -98,4 +111,5 @@ const GuessLink = styled(BaseLink)`
   right: 0;
   bottom: 0;
   color: ${colours.white};
+
 `

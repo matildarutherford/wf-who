@@ -6,6 +6,8 @@ import styled from 'styled-components'
 import Layout from '../components/layout'
 import Heading from '../components/heading'
 import Main from '../components/main'
+import Preloader from '../components/preloader'
+import Moustache from '../components/moustache'
 
 // CSS
 import { WhiteContainer, BlackContainer } from '../styles/global'
@@ -17,7 +19,8 @@ class StatsPage extends Component {
       photos: [],
       guesses: [],
       parsed: 0,
-      finished: false
+      loaded: false,
+      loading: true
     }
   }
 
@@ -39,7 +42,7 @@ class StatsPage extends Component {
       });
 
       this.setState((prevState) => {
-        return { guesses: filteredGuesses, finished: true }
+        return { guesses: filteredGuesses, loaded: true, loading: false }
       });
     }
   }
@@ -58,9 +61,11 @@ class StatsPage extends Component {
         });
 
         // Compare this session's guesses with actual and calculate total
-        guess.correct = this.state.photos.filter((photo) => {
-          return guess.guesses.some((e) => e.photo === photo.id && e.name === photo.name);
-        }).length;
+        if (guess) {
+          guess.correct = this.state.photos.filter((photo) => {
+            return guess.guesses.some((e) => e.photo === photo.id && e.name === photo.name);
+          }).length;
+        }
 
         // Bump parsed state
         this.setState((prevState) => {
@@ -87,13 +92,15 @@ class StatsPage extends Component {
   render() {
     return (<Layout>
       <Main>
+        <Preloader loading={this.state.loading} loaded={this.state.loaded}/>
+        {!this.state.loaded?(<Moustache/>):false}
         <WhiteContainer>
-          <Heading>Winners</Heading>
+          {this.state.loaded? (<Heading>Winners</Heading>) : false}
         </WhiteContainer>
         <BlackContainer>
           <List>
-            {this.state.finished && this.state.guesses.sort(this.sortGuesses).map((guess, index) => {
-              return (<ListItem key={index}>{guess.name} - {guess.correct}/{this.state.photos.length}</ListItem>);
+            {this.state.loaded && this.state.guesses.filter(guess => guess.guesses.length > 0).sort(this.sortGuesses).map((guess, index) => {
+              return (<ListItem key={index}>{guess.name} - {guess.correct}/{guess.guesses.length} ({Math.round(guess.correct/guess.guesses.length*100)}%)</ListItem>);
             })}
           </List>
         </BlackContainer>
@@ -105,7 +112,8 @@ class StatsPage extends Component {
 export default StatsPage
 
 const List = styled.ol`
-
+  overflow: scroll;
+  height: 50vh;
 `
 const ListItem = styled.li`
 
