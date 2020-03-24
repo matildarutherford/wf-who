@@ -1,120 +1,119 @@
+import { BaseLink, BlackContainer, WhiteContainer } from '../styles/global'
 import React, { Component } from 'react'
-import styled from 'styled-components'
-import { db } from '../config/firebase'
-import { connect } from 'react-redux'
-import { navigate } from 'gatsby'
+// CSS
+import { colours, spacing } from '../styles/variables'
 
 // Components
 import Layout from '../components/layout'
-import SubHeading from '../components/subheading'
 import Main from '../components/main'
-import Preloader from '../components/preloader'
 import Moustache from '../components/moustache'
-
-// CSS
-import { colours, spacing } from '../styles/variables'
-import { BaseLink, WhiteContainer, BlackContainer } from '../styles/global'
+import Preloader from '../components/preloader'
+import SubHeading from '../components/subheading'
+import { connect } from 'react-redux'
+import { db } from '../config/firebase'
+import { navigate } from 'gatsby'
+import styled from 'styled-components'
 
 class PlayPage extends Component {
-  constructor() {
-    super()
-    this.state = {
-      loaded: true,
-      loading: false,
-    }
-  }
-  componentDidMount() {
-    this.nameInput.focus()
-  }
+   constructor() {
+      super()
+      this.state = {
+         loaded: true,
+         loading: false,
+      }
+   }
+   componentDidMount() {
+      this.nameInput.focus()
+   }
 
-  createDocument(e, callback) {
-    e.preventDefault()
+   createDocument(e, callback) {
+      e.preventDefault()
 
-    this.setState({ loaded: false, loading: true })
+      this.setState({ loaded: false, loading: true })
 
-    db.collection('guesses')
-      .add({
-        name: this.props.name,
-      })
-      .then(docRef => {
-        callback(docRef.id)
-        navigate('/donate')
-      })
-  }
+      db.collection('guesses')
+         .add({
+            name: this.props.name,
+         })
+         .then(docRef => {
+            callback(docRef.id)
+            navigate('/guess')
+         })
+   }
 
-  render() {
-    const { name, register, saveDocumentId } = this.props
-    return (
-      <Layout>
-        <Main>
-          <Preloader
-            duration="2.0"
-            loading={this.state.loading}
-            loaded={this.state.loaded}
-          />
-          {this.state.loading ? <Moustache /> : false}
-          {this.state.loaded && name ? (
-            <GuessLink
-              to="/donate"
-              onClick={e => this.createDocument(e, saveDocumentId)}
-            >
-              Next
-            </GuessLink>
-          ) : null}
-          <WhiteContainer>
-            {this.state.loaded ? <SubHeading>Your name:</SubHeading> : false}
-          </WhiteContainer>
-          <BlackContainer>
-            {this.state.loaded ? (
-              <form
-                method="post"
-                onSubmit={e => this.createDocument(e, saveDocumentId)}
-              >
-                <Input
-                  type="text"
-                  name="name"
-                  ref={input => {
-                    this.nameInput = input
-                  }}
-                  value={name}
-                  onChange={e => register(e.target.value)}
-                />
-              </form>
-            ) : (
-              false
-            )}
-          </BlackContainer>
-        </Main>
-      </Layout>
-    )
-  }
+   render() {
+      const { name, register, saveDocumentId } = this.props
+      return (
+         <Layout>
+            <Main>
+               <Preloader
+                  duration="2.0"
+                  loading={this.state.loading}
+                  loaded={this.state.loaded}
+               />
+               {this.state.loading ? <Moustache /> : false}
+               {this.state.loaded && name ? (
+                  <GuessLink
+                     to="/guess"
+                     onClick={e => this.createDocument(e, saveDocumentId)}
+                  >
+                     Next
+                  </GuessLink>
+               ) : null}
+               <WhiteContainer>
+                  {this.state.loaded ? <SubHeading>Your name:</SubHeading> : false}
+               </WhiteContainer>
+               <BlackContainer>
+                  {this.state.loaded ? (
+                     <form
+                        method="post"
+                        onSubmit={e => this.createDocument(e, saveDocumentId)}
+                     >
+                        <Input
+                           type="text"
+                           name="name"
+                           ref={input => {
+                              this.nameInput = input
+                           }}
+                           value={name}
+                           onChange={e => register(e.target.value)}
+                        />
+                     </form>
+                  ) : (
+                        false
+                     )}
+               </BlackContainer>
+            </Main>
+         </Layout>
+      )
+   }
 }
 
 const mapStateToProps = state => {
-  return {
-    name: state.name,
-    documentId: state.documentId,
-  }
+   return {
+      name: state.name,
+      documentId: state.documentId,
+   }
 }
 
 const mapDispatchToProps = dispatch => {
-  return {
-    saveDocumentId: documentId =>
-      dispatch({
-        type: 'DOCUMENT_SAVE',
-        documentId: documentId,
-      }),
-    register: name =>
-      dispatch({
-        type: 'REGISTER',
-        name: name,
-      }),
-  }
+   return {
+      saveDocumentId: documentId =>
+         dispatch({
+            type: 'DOCUMENT_SAVE',
+            documentId: documentId,
+         }),
+      register: name =>
+         dispatch({
+            type: 'REGISTER',
+            name: name,
+         }),
+   }
 }
 
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+   mapStateToProps,
+   mapDispatchToProps
 )(PlayPage)
 
 const Input = styled.input`

@@ -1,55 +1,54 @@
+import {
+   BaseLink,
+   BlackContainer,
+   WhiteContainer,
+   baseLinkStyles,
+} from '../styles/global'
 import React, { Component } from 'react'
-import styled from 'styled-components'
 
+import Heading from '../components/heading'
 // Components
 import Layout from '../components/layout'
-import Heading from '../components/heading'
 import Main from '../components/main'
-
+import SubHeading from '../components/subheading'
 // CSS
 import { above } from '../styles/mixins'
 import { colours } from '../styles/variables'
-import {
-  baseLinkStyles,
-  BaseLink,
-  WhiteContainer,
-  BlackContainer,
-} from '../styles/global'
-import SubHeading from '../components/subheading'
+import styled from 'styled-components'
 
 class IndexPage extends Component {
-  render() {
-    return (
-      <Layout>
-        <Main>
-          <AboutLink to="/about">About</AboutLink>
-          <DonateLink href="https://mosista.co/babyface-ie" target="_blank">
+   render() {
+      return (
+         <Layout>
+            <Main>
+               <AboutLink to="/about">About</AboutLink>
+               {/* <DonateLink href="https://mosista.co/babyface-ie" target="_blank">
             Donate
-          </DonateLink>
-          <PlayLink to="/play">Play</PlayLink>
-          <WhiteContainer>
-            <Heading>Baby</Heading>
-            <SubHeading>20</SubHeading>
-          </WhiteContainer>
-          <BlackContainer>
-            <Heading>Face</Heading>
-            <SubHeading>19</SubHeading>
-          </BlackContainer>
-        </Main>
-      </Layout>
-    )
-  }
+          </DonateLink> */}
+               <PlayLink to="/play">Play</PlayLink>
+               <WhiteContainer>
+                  <Heading>WF-</Heading>
+                  {/* <SubHeading>20</SubHeading> */}
+               </WhiteContainer>
+               <BlackContainer>
+                  <Heading>Who?</Heading>
+                  {/* <SubHeading>20</SubHeading> */}
+               </BlackContainer>
+            </Main>
+         </Layout>
+      )
+   }
 }
 
 export default IndexPage
 
 const AboutLink = styled(BaseLink)`
   top: 0;
-  right: 0;
+  left: 0;
   color: ${colours.black};
 
   ${above.md`
-    color: ${colours.white};
+    color: ${colours.black};
   `};
 `
 

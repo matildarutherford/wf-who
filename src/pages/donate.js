@@ -1,97 +1,96 @@
+import {
+   BaseLink,
+   BlackContainer,
+   WhiteContainer,
+   baseLinkStyles,
+} from '../styles/global'
 import React, { Component } from 'react'
-import styled from 'styled-components'
-import { connect } from 'react-redux'
-import { navigate } from 'gatsby'
 
 // Components
 import Layout from '../components/layout'
 import Main from '../components/main'
-import Preloader from '../components/preloader'
 import Moustache from '../components/moustache'
-
+import Preloader from '../components/preloader'
 // CSS
 import { colours } from '../styles/variables'
-import {
-  WhiteContainer,
-  BaseLink,
-  BlackContainer,
-  baseLinkStyles,
-} from '../styles/global'
+import { connect } from 'react-redux'
+import { navigate } from 'gatsby'
+import styled from 'styled-components'
 
 class DonatePage extends Component {
-  constructor() {
-    super()
-    this.state = {
-      loaded: true,
-      loading: false,
-    }
-  }
+   constructor() {
+      super()
+      this.state = {
+         loaded: true,
+         loading: false,
+      }
+   }
 
-  render() {
-    return (
-      <Layout>
-        <Main>
-          <Preloader
-            duration="2.0"
-            loading={this.state.loading}
-            loaded={this.state.loaded}
-          />
-          {this.state.loading ? <Moustache /> : false}
-          {this.state.loaded ? (
-            <GuessLink to="/guess" onClick={() => navigate('/guess')}>
-              Skip
-            </GuessLink>
-          ) : null}
-          <WhiteContainer>
-            {this.state.loaded ? (
-              <Prompt style={{ textAlign: 'right' }}>
-                Have you made a <br />
+   render() {
+      return (
+         <Layout>
+            <Main>
+               <Preloader
+                  duration="2.0"
+                  loading={this.state.loading}
+                  loaded={this.state.loaded}
+               />
+               {this.state.loading ? <Moustache /> : false}
+               {this.state.loaded ? (
+                  <GuessLink to="/guess" onClick={() => navigate('/guess')}>
+                     Skip
+                  </GuessLink>
+               ) : null}
+               <WhiteContainer>
+                  {this.state.loaded ? (
+                     <Prompt style={{ textAlign: 'right' }}>
+                        Have you made a <br />
                 donation to Movember?
-              </Prompt>
-            ) : (
-              false
-            )}
-          </WhiteContainer>
-          <BlackContainer>
-            {this.state.loaded ? (
-              <DonateLink href="https://mosista.co/babyface-ie" target="_blank">
-                Donate
-              </DonateLink>
-            ) : (
-              false
-            )}
-          </BlackContainer>
-        </Main>
-      </Layout>
-    )
-  }
+                     </Prompt>
+                  ) : (
+                        false
+                     )}
+               </WhiteContainer>
+               <BlackContainer>
+                  {this.state.loaded ? (
+                     <DonateLink href="https://mosista.co/babyface-ie" target="_blank">
+                        Donate
+                     </DonateLink>
+                  ) : (
+                        false
+                     )}
+               </BlackContainer>
+            </Main>
+         </Layout>
+      )
+   }
 }
 
 const mapStateToProps = state => {
-  return {
-    name: state.name,
-    documentId: state.documentId,
-  }
+   return {
+      name: state.name,
+      documentId: state.documentId,
+   }
 }
 
 const mapDispatchToProps = dispatch => {
-  return {
-    saveDocumentId: documentId =>
-      dispatch({
-        type: 'DOCUMENT_SAVE',
-        documentId: documentId,
-      }),
-    register: name =>
-      dispatch({
-        type: 'REGISTER',
-        name: name,
-      }),
-  }
+   return {
+      saveDocumentId: documentId =>
+         dispatch({
+            type: 'DOCUMENT_SAVE',
+            documentId: documentId,
+         }),
+      register: name =>
+         dispatch({
+            type: 'REGISTER',
+            name: name,
+         }),
+   }
 }
 
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+   mapStateToProps,
+   mapDispatchToProps
 )(DonatePage)
 
 const GuessLink = styled(BaseLink)`
